@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CutsceneData.h"
-#include "ICutsceneHost.h"
+#include "ICutsceneHostBridge.h"
 #include <memory>
 #include <set>
 
@@ -38,7 +38,7 @@ public:
  */
 class CutscenePlayer {
 public:
-    CutscenePlayer(ICutsceneHost* host);
+    CutscenePlayer(ICutsceneHostBridge* host);
     ~CutscenePlayer();
 
     /**
@@ -91,7 +91,7 @@ private:
     void TriggerClipStart(ICutsceneClip* clip);
     void TriggerClipEnd(ICutsceneClip* clip);
 
-    ICutsceneHost* m_host;
+    ICutsceneHostBridge* m_host;
     std::unique_ptr<CutsceneInstance> m_activeInstance;
 };
 

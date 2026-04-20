@@ -79,12 +79,16 @@ std::string TodoManager::ExportChangelog() {
     for (auto& item : m_state.items) {
         if (item.isDone && !item.isExported) {
             ss << FormatItemForChangelog(item) << "\n";
-            item.isExported = true;
+            item.isExported = true; // Mark as exported
             hasAny = true;
         }
     }
 
-    if (!hasAny) return "";
+    if (!hasAny) {
+        m_state.currentChangelogPath = "";
+        NotifyStateChanged();
+        return "";
+    }
 
     std::string content = ss.str();
     

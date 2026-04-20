@@ -79,7 +79,13 @@ public:
     virtual std::string GetWorkingDirectory() const = 0;
 
     /**
+     * @brief Returns a copy of the transcript (thread-safe snapshot).
+     */
+    virtual std::vector<TranscriptEntry> GetTranscriptCopy() const = 0;
+
+    /**
      * @brief Returns the full transcript of the session.
+     * @deprecated Use GetTranscriptCopy for thread-safe access.
      */
     virtual const std::vector<TranscriptEntry>& GetTranscript() const = 0;
 

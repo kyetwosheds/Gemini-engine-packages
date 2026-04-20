@@ -25,6 +25,10 @@ public:
     std::shared_ptr<IAgentProvider> GetProvider() const override { return m_provider; }
     std::string GetWorkingDirectory() const override { return m_workingDir; }
     const std::vector<TranscriptEntry>& GetTranscript() const override { return m_transcript; }
+    std::vector<TranscriptEntry> GetTranscriptCopy() const override {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        return m_transcript;
+    }
     void SendPrompt(const std::string& prompt) override;
     void Cancel() override;
     AgentStatus GetStatus() const override { return m_status; }

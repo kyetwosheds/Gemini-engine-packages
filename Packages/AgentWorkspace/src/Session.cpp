@@ -67,6 +67,11 @@ void Session::Cancel() {
     }
 }
 
+AgentStatus Session::GetStatus() const {
+    std::lock_guard<std::mutex> lock(m_mutex);
+    return m_status;
+}
+
 void Session::AddListener(ISessionListener* listener) {
     std::lock_guard<std::mutex> lock(m_mutex);
     m_listeners.insert(listener);
